@@ -362,11 +362,9 @@ function configure-remote-access-agent() {
   # - cat /sys/class/dmi/id/product_uuid
   # - dmidecode -s system-uuid
   # return different values
-//TODO: is this the right way???
   DEVICE_GUID=$(dmidecode -s system-uuid)
   sed -i "s|GUID: '.*'|GUID: '$DEVICE_GUID'|" /etc/edge-node/node/confs/remote-access-agent.yaml
-  sed -i 's/, platform-manageability-agent//g' /etc/edge-node/node/confs/remote-access-agent.yaml
-  systemctl restart node-agent
+  systemctl restart remote-access-agent
 }
 
 function configure-credentials-permissions() {
